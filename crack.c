@@ -4,56 +4,45 @@
 
 #include "md5.h"
 
-const int PASS_LEN=50;        // Maximum any password will be
+#if __has_include("fileutil.h")
+#include "fileutil.h"
+#endif
 
-
-// Stucture to hold both a plaintext password and a hash.
-struct entry 
-{
-    // TODO: FILL THIS IN
-};
-
-
-
-// TODO
-// Read in the dictionary file and return an array of entry structs.
-// Each entry should contain both the hash and the dictionary
-// word.
-struct entry *read_dictionary(char *filename, int *size)
-{
-    *size = 0;
-    return NULL;
-}
+#define PASS_LEN 50     // Maximum length any password will be.
+#define HASH_LEN 33     // Length of hash plus one for null.
 
 
 int main(int argc, char *argv[])
 {
     if (argc < 3) 
     {
-        printf("Usage: %s hash_file dict_file\n", argv[0]);
+        printf("Usage: %s hash_file dictionary_file\n", argv[0]);
         exit(1);
     }
 
-    // TODO: Read the dictionary file into an array of entry structures
-    struct entry *dict = read_dictionary(NULL, NULL);
+    // TODO: Read the hashes file into an array.
+    //   Use either a 2D array or an array of arrays.
+    //   Use the loadFile function from fileutil.c
+    //   Uncomment the appropriate statement.
+    int size;
+    //char (*hashes)[HASH_LEN] = loadFile(argv[1], &size);
+    //char **hashes = loadFile(argv[1], &size);
     
-    // TODO: Sort the hashed dictionary using qsort.
-    // You will need to provide a comparison function that
-    // sorts the array by hash value.
-    qsort(dict, 0, 0, NULL);
+    // CHALLENGE1: Sort the hashes using qsort.
     
-    // Partial example of using bsearch, for testing. Delete this line
-    // once you get the remainder of the program working.
-    // This is the hash for "rockyou".
-    struct entry *found = bsearch("f806fc5a2a0d5ba2471600758452799c", dict, 0, 0, NULL);
+    // TODO
+    // Open the password file for reading.
 
     // TODO
-    // Open the hash file for reading.
+    // For each password, hash it, then use the array search
+    // function from fileutil.h to find the hash.
+    // If you find it, display the password and the hash.
+    // Keep track of how many hashes were found.
+    // CHALLENGE1: Use binary search instead of linear search.
 
     // TODO
-    // For each hash, search for it in the dictionary using
-    // binary search.
-    // If you find it, get the corresponding plaintext dictionary word.
-    // Print out both the hash and word.
-    // Need only one loop. (Yay!)
+    // When done with the file:
+    //   Close the file
+    //   Display the number of hashes found.
+    //   Free up memory.
 }
